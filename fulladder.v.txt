@@ -1,0 +1,30 @@
+module full_adder(
+  input a,
+  input b,
+  input cin,
+  output sum,
+  output cout
+);
+
+  wire s1, c1, c2;
+
+  // First Half Adder
+  half_adder HA1 (
+    .a(a),
+    .b(b),
+    .s(s1),
+    .c(c1)
+  );
+
+  // Second Half Adder
+  half_adder HA2 (
+    .a(s1),
+    .b(cin),
+    .s(sum),
+    .c(c2)
+  );
+
+  // Final carry-out
+  assign cout = c1 | c2;
+
+endmodule
