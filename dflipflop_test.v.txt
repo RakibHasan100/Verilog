@@ -1,0 +1,36 @@
+`timescale 1ns/1ps
+module test;
+reg clk,rst,d;
+wire q;
+d_ff uut(
+.clk(clk),
+.rst(rst),
+.d(d),
+.q(q)
+);
+
+initial begin 
+clk = 0;
+forever #5 clk = ~ clk;
+end
+
+initial begin 
+$dumpfile("had.vcd");
+$dumpvars(0,test);
+
+rst=1;d=0; #10;
+rst=0;
+
+d=0; #10;
+d=1; #10;
+d=0; #10;
+d=1; #10;
+d=0; #10;
+d=1; #10;
+d=0; #10;
+d=1; #10;
+
+
+$finish;
+end 
+endmodule
