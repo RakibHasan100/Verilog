@@ -1,0 +1,31 @@
+module jk_ff(
+input wire clk,
+input  rst,
+input j,
+input  k,
+output reg q
+);
+
+always @(negedge clk or negedge rst) begin
+//always @(*) begin.... sensitivity for level triggering
+//always @(clk or rst or j or k) begin.... sensitivity for level triggering
+//always @(posedge clk or posedge rst) begin//sensitivity for positive edge triggering
+//always @(negedge clk or negedge rst) begin//sensitivity for negitive edge triggering
+       if(rst) begin 
+              q<= 1'b0;
+       end
+
+       //else if(clk) begin//only for level triggering
+       else begin//otherwise
+              case({j,k})
+                   2'b00: q<=q;
+                   2'b01: q<=1'b0;
+                   2'b10: q<=1'b1;
+                   2'b11: q<=~q;
+              endcase
+        end
+ end
+ 
+endmodule  
+            
+
